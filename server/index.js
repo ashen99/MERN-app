@@ -10,6 +10,8 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Hi server started on port: ${PORT}`));
 
+app.use(express.json());
+
 //FwgTrAex1nIanNfU
 //mongodb+srv://Ash:<password>@cluster0.i5zcj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 
@@ -23,6 +25,10 @@ mongoose.connect(
   },
   (err) => {
     if (err) return console.error(err);
-    console.log("connected to MOngoDB");
+    console.log("connected to MongoDB");
   }
 );
+
+//set up routers
+
+app.use("/auth", require("./routers/userRouter"));
