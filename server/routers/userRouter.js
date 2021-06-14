@@ -44,7 +44,7 @@ router.post("/", async (req, res) => {
 
     const savedUser = await newUser.save();
 
-    //log the user in
+    //sign the token
 
     const token = jwt.sign(
       {
@@ -53,7 +53,13 @@ router.post("/", async (req, res) => {
       process.env.JWT_SECRET
     );
 
-    console.log(token);
+    //send the token in a HTTP-only cookie
+
+    res
+      .cookie("token", token, {
+        httpOnly: true,
+      })
+      .send();
   } catch (err) {
     console.error(err);
     res.status(500).send();
