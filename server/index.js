@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const cookieParser = require("cookie-parser");
 
 dotenv.config();
 
@@ -11,6 +12,7 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Hi server started on port: ${PORT}`));
 
 app.use(express.json());
+app.use(cookieParser());
 
 //FwgTrAex1nIanNfU
 //mongodb+srv://Ash:<password>@cluster0.i5zcj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
@@ -32,3 +34,4 @@ mongoose.connect(
 //set up routers
 
 app.use("/auth", require("./routers/userRouter"));
+app.use("/customer", require("./routers/customerRouter"));
